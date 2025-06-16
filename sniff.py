@@ -39,13 +39,12 @@ def main() -> None:
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     while True:
-        print(
-            loop.run_until_complete(
+        uplink_bytes, downlink_bytes = loop.run_until_complete(
                 capture_uplink_and_downlink_bytes(
                     host_ip="172.23.69.87", remote_ip="91.189.91.157", loop=loop
                 )
             )
-        )
+        print(f"uplink: {uplink_bytes}, downlink: {downlink_bytes}")
 
 
 if __name__ == "__main__":
