@@ -29,8 +29,8 @@ async def capture_uplink_and_downlink_bytes(
     )
 
     uplink_bytes, downlink_bytes = await asyncio.gather(
-        async_wrapper_capture_packets_bytes(loop, uplink_filter, 5),
-        async_wrapper_capture_packets_bytes(loop, downlink_filter, 5),
+        async_wrapper_capture_packets_bytes(loop, uplink_filter, 1),
+        async_wrapper_capture_packets_bytes(loop, downlink_filter, 1),
     )
     return uplink_bytes, downlink_bytes  # type: ignore
 
@@ -38,13 +38,14 @@ async def capture_uplink_and_downlink_bytes(
 def main() -> None:
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    print(
-        loop.run_until_complete(
-            capture_uplink_and_downlink_bytes(
-                host_ip="0.0.0.0", remote_ip="172.23.69.87", loop=loop
+    while True:
+        print(
+            loop.run_until_complete(
+                capture_uplink_and_downlink_bytes(
+                    host_ip="172.23.69.87", remote_ip="91.189.91.157", loop=loop
+                )
             )
         )
-    )
 
 
 if __name__ == "__main__":
