@@ -1,14 +1,21 @@
+from typing import List
 import pyshark  # type: ignore
 import asyncio
 
-def sniff() -> None:
+def get_bytes() -> int:
     capture = pyshark.LiveCapture(interface='eth0')
-    capture.sniff(timeout=50)
-    for packet in capture:
-        print(packet)
+    capture.sniff(timeout=5)
+
+    return sum([int(packet.length) for packet in capture._packets])
 
 
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
+def main() -> None:
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    packtes = get_bytes()
+    print(packtes)
+    
 
-sniff()
+
+if __name__ == "__main__":
+    main()
