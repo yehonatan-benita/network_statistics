@@ -40,7 +40,9 @@ def main() -> None:
     asyncio.set_event_loop(loop)
     print(
         loop.run_until_complete(
-            capture_uplink_and_downlink_bytes(host_ip="0.0.0.0", remote_ip="172.23.69.87", loop=loop)
+            capture_uplink_and_downlink_bytes(
+                host_ip="0.0.0.0", remote_ip="172.23.69.87", loop=loop
+            )
         )
     )
 
